@@ -1,16 +1,10 @@
 #include <PololuLedStrip.h>
-
-#define BUTTON_PIN 11
-#define LED_COUNT 22
+#include <header.h>
 
 PololuLedStrip<12> ledStrip;
 
-rgb_color colors[LED_COUNT];
-
-rgb_color new_color;
-
 void setup() {
-  pinMode(BUTTON_PIN, INPUT);   
+  pinMode(BUTTON_PIN, INPUT);
 }
 
 void loop() {
@@ -20,6 +14,8 @@ void loop() {
   
   delay(10);
 }
+
+rgb_color new_color;
 
 int buttonState = 0;
 int buttonLoop = 0;
