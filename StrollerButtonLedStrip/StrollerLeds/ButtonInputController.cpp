@@ -4,8 +4,6 @@
 #include "StrollerLeds.h"
 #include "LedPrinter.h"
 
-PololuLedStrip<12> ledStrip;
-
 int buttonState = 0;
 int buttonLoop = 0;
 
@@ -32,10 +30,10 @@ void ButtonInputController::HandleButtonPush() {
 
 	switch (buttonLoop % 6) {
 		case 0:
-			PlainColor(blue);
+			PlainColor(green);
 			break;
 		case 1:
-			PlainColor(green);
+			PlainColor(blue);
 			break;
 		case 2:
 			PlainColor(pink);
@@ -51,7 +49,7 @@ void ButtonInputController::HandleButtonPush() {
 			break;
 	}
 
-	ledStrip.write(ledPrinter.Colors, LED_COUNT);
+	ledPrinter.Print();
 }
 
 void ButtonInputController::PlainColor(rgb_color color) {
