@@ -8,7 +8,7 @@ ButtonInputController* buttonInputController;
 void StrollerLeds::Setup() {
 	pinMode(BUTTON_PIN, INPUT);
 	LedPrinter *ledPrinter = new LedPrinter();
-	buttonInputController = new ButtonInputController();
+	buttonInputController = new ButtonInputController(*ledPrinter);
 }
 
 void StrollerLeds::Execute() {

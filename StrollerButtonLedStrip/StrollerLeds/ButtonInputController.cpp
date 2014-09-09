@@ -2,10 +2,9 @@
 #include "Arduino.h"
 #include "PololuLedStrip.h"
 #include "StrollerLeds.h"
+#include "LedPrinter.h"
 
 PololuLedStrip<12> ledStrip;
-
-rgb_color colors[LED_COUNT];
 
 int buttonState = 0;
 int buttonLoop = 0;
@@ -15,6 +14,10 @@ const rgb_color blue = (rgb_color){ 0, 0, 255 };
 const rgb_color pink = (rgb_color){ 255, 0, 255 };
 const rgb_color white = (rgb_color){ 255, 255, 255 };
 const rgb_color black = (rgb_color){ 0, 0, 0 };
+
+ButtonInputController::ButtonInputController(const LedPrinter &lp) {
+	ledPrinter = lp;
+}
 
 void ButtonInputController::HandleButtonPush() {
 	int newButtonState = digitalRead(BUTTON_PIN);
@@ -48,12 +51,12 @@ void ButtonInputController::HandleButtonPush() {
 			break;
 	}
 
-	ledStrip.write(colors, LED_COUNT);
+	ledStrip.write(ledPrinter.Colors, LED_COUNT);
 }
 
 void ButtonInputController::PlainColor(rgb_color color) {
 	for(uint16_t i = 0; i < LED_COUNT; i++) {
-		colors[i] = color;
+		ledPrinter.Colors[i] = color;
 	}
 }
 
@@ -61,6 +64,6 @@ void ButtonInputController::Gradient() {
 	byte time = millis() >> 2;
 	for(uint16_t i = 0; i < LED_COUNT; i++) {
 		byte x = time - 8 * i;
-		colors[i] = (rgb_color){ x, 255 - x, x };
+		ledPrinter.Colors[i] = (rgb_color){ x, 255 - x, x };
 	}
 }

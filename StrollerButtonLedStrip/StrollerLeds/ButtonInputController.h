@@ -1,17 +1,17 @@
 #include "PololuLedStrip.h"
+#include "LedPrinter.h"
 
 #ifndef BUTTON_INPUT_CONTROLLER_H
 #define BUTTON_INPUT_CONTROLLER_H
-
-#define LED_COUNT 22
 
 class ButtonInputController {
 	private:
 		void PlainColor(rgb_color color);
 		void Gradient();
+		LedPrinter ledPrinter;
 	public:
-		ButtonInputController() {};
+		ButtonInputController(const LedPrinter &lp);
 		void HandleButtonPush();
 };
- 
+
 #endif
