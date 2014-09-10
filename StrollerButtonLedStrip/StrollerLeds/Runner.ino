@@ -1,3 +1,4 @@
+#include <StandardCplusplus.h>
 #include "StrollerLeds.h"
 
 StrollerLeds* strollerLeds;
