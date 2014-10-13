@@ -1,4 +1,3 @@
-#include "PololuLedStrip.h"
 #include "LedStripColors.h"
 
 #ifndef LED_PRINTER_H

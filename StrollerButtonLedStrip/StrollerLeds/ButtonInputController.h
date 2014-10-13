@@ -1,4 +1,3 @@
-#include "PololuLedStrip.h"
 #include "LedPrinter.h"
 
 #ifndef BUTTON_INPUT_CONTROLLER_H
@@ -6,9 +5,8 @@
 
 class ButtonInputController {
 	private:
-		void PlainColor(rgb_color color);
-		void Gradient();
 		LedPrinter ledPrinter;
+		LedStripColors buttonColors;
 	public:
 		ButtonInputController(const LedPrinter &lp);
 		void HandleButtonPush();

@@ -14,8 +14,6 @@ const rgb_color pink = (rgb_color){ 255, 0, 255 };
 const rgb_color white = (rgb_color){ 255, 255, 255 };
 const rgb_color black = (rgb_color){ 0, 0, 0 };
 
-LedStripColors colors;
-
 ButtonInputController::ButtonInputController(const LedPrinter &lp) {
 	ledPrinter = lp;
 }
@@ -29,28 +27,30 @@ void ButtonInputController::HandleButtonPush() {
 	} else if (newButtonState == LOW && buttonState == HIGH) {
 		buttonState = newButtonState;
 		return;
+	} else {
+		return;
 	}
 
 	switch (buttonLoop % 6) {
 		case 0:
-			colors.SetColor(blue);
+			buttonColors.SetColor(blue);
 			break;
 		case 1:
-			colors.SetColor(green);
+			buttonColors.SetColor(green);
 			break;
 		case 2:
-			colors.SetColor(pink);
+			buttonColors.SetColor(pink);
 			break;
 		case 3:
-			colors.SetColor(white);
+			buttonColors.SetColor(white);
 			break;
 		case 4:
-			colors.Gradient();
+			buttonColors.Gradient();
 			break;
 		case 5:
-			colors.SetColor(black);
+			buttonColors.SetColor(black);
 			break;
 	}
 
-	ledPrinter.Print(colors);
+	ledPrinter.Print(buttonColors);
 }
