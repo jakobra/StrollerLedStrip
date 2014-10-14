@@ -13,6 +13,12 @@ SerialInputController::SerialInputController(const LedPrinter &lp) {
 }
 
 void SerialInputController::HandleSerialInput() {
+	static char buffer[80];
+ 	if (readline(Serial.read(), buffer, 80) > 0) {
+		Serial.print("You entered: >");
+		Serial.print(buffer);
+		Serial.println("<");
+	}
 	char messageType[10];
 	char incomingByte;
 	if (Serial.available() > 10) {
@@ -36,4 +42,28 @@ void SerialInputController::HandleSerialInput() {
 
 			ledPrinter.Print(serialColors);
 	}
+}
+
+
+bool SerialInputController::ReadSerialInput(int readch, char *buffer, int len) {
+	static int pos = 0;
+	int rpos;
+
+	if (readch > 0) {
+		switch (readch) {
+		case '\n': // Ignore new-lines
+			break;
+		case '\r': // Return on CR
+			rpos = pos;
+			pos = 0;  // Reset position index ready for next time
+			return rpos;
+		default:
+			if (pos < len-1) {
+				buffer[pos++] = readch;
+				buffer[pos] = 0;
+			}
+		}
+	}
+	// No end of line has been found, so return -1.
+	return -1;
 }
