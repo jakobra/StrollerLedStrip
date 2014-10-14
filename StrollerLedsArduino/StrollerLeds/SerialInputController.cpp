@@ -14,7 +14,7 @@ SerialInputController::SerialInputController(const LedPrinter &lp) {
 
 void SerialInputController::HandleSerialInput() {
 	static char buffer[80];
- 	if (readline(Serial.read(), buffer, 80) > 0) {
+ 	if (ReadSerialInput(Serial.read(), buffer, 80) > 0) {
 		Serial.print("You entered: >");
 		Serial.print(buffer);
 		Serial.println("<");
@@ -45,7 +45,7 @@ void SerialInputController::HandleSerialInput() {
 }
 
 
-bool SerialInputController::ReadSerialInput(int readch, char *buffer, int len) {
+int SerialInputController::ReadSerialInput(int readch, char *buffer, int len) {
 	static int pos = 0;
 	int rpos;
 

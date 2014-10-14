@@ -7,7 +7,7 @@ class SerialInputController {
 	private:
 		LedPrinter ledPrinter;
 		LedStripColors serialColors;
-		bool ReadSerialInput();
+		int ReadSerialInput(int readch, char *buffer, int len);
 	public:
 		SerialInputController(const LedPrinter &lp);
 		void HandleSerialInput();
