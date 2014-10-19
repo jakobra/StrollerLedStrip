@@ -8,6 +8,8 @@ class SerialInputController {
 		LedPrinter ledPrinter;
 		LedStripColors serialColors;
 		int ReadSerialInput(int readch, char *buffer, int len);
+		void ParseParams(int paramCount);
+		int GetIntFromHex(char first, char second);
 	public:
 		SerialInputController(const LedPrinter &lp);
 		void HandleSerialInput();
