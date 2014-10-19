@@ -27,7 +27,7 @@ void ButtonInputController::HandleButtonPush() {
 	} else if (newButtonState == LOW && buttonState == HIGH) {
 		buttonState = newButtonState;
 		return;
-	} else {
+	} else if((buttonLoop % 6) != 4) {
 		return;
 	}
 
